@@ -39,10 +39,3 @@ id_dsa
 Thumbs.db
 .vscode/
 .idea/
-
-# Cursor / AI local files
-.cursor/
-.cursorignore
-.cursorrules
-*.prompt
-*.prompts
