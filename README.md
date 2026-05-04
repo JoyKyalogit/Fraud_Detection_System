@@ -7,6 +7,9 @@ A machine learning fraud detection project with:
 
 The API combines model scoring with business safety rules and returns a verdict, risk level, and recommendation.
 
+## Live Demo
+https://fraud-dashboard-i71m.onrender.com
+
 ## Problem It Solves
 
 Financial transactions happen in large volumes, and manual fraud checks are too slow and inconsistent.  
