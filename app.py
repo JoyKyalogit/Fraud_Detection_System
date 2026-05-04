@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import pandas as pd
 from datetime import datetime
+import os
 
 st.set_page_config(
     page_title="Fraud Detection System",
@@ -254,6 +255,8 @@ if "history" not in st.session_state:
 if "latest_result" not in st.session_state:
     st.session_state.latest_result = None
 
+api_base_url = os.getenv("API_BASE_URL", "http://127.0.0.1:8000").rstrip("/")
+
 with st.sidebar:
     st.markdown("### Fraud Detection System")
 
@@ -428,7 +431,7 @@ payload = {
 if analyze:
     with st.spinner("Analyzing transaction..."):
         try:
-            response = requests.post("http://127.0.0.1:8000/predict", json=payload, timeout=5)
+            response = requests.post(f"{api_base_url}/predict", json=payload, timeout=10)
             result = response.json()
 
             prob = result["fraud_probability"]
@@ -451,7 +454,10 @@ if analyze:
             st.rerun()
 
         except requests.exceptions.ConnectionError:
-            st.error("Cannot connect to API. Make sure `python -m uvicorn deploy:app --reload --port 8000` is running.")
+            st.error(
+                f"Cannot connect to API at {api_base_url}. "
+                "For local run, make sure `python -m uvicorn deploy:app --reload --port 8000` is running."
+            )
         except Exception as e:
             st.error(f"Unexpected error: {e}")
 
