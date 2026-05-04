@@ -18,4 +18,4 @@ services:
         fromService:
           type: web
           name: fraud-api
-          property: url
+          property: hostport

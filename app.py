@@ -256,6 +256,8 @@ if "latest_result" not in st.session_state:
     st.session_state.latest_result = None
 
 api_base_url = os.getenv("API_BASE_URL", "http://127.0.0.1:8000").rstrip("/")
+if not api_base_url.startswith(("http://", "https://")):
+    api_base_url = f"http://{api_base_url}"
 
 with st.sidebar:
     st.markdown("### Fraud Detection System")
